@@ -1,1 +1,3 @@
-# Hello hello matmoutmotue
+# Recipe generator, based on GPT and GAN
+
+WIP
