@@ -4,20 +4,20 @@ import openai
 from front import make_space
 
 st.title("From ingredients to Recipes")
+st.markdown("""##### This app generates recipes and pictures of the meals based on the ingredients you have at home""")
 make_space(3)
 
 #define key
 openai.api_key = st.secrets["openai_key"]
-#openai.api_key = "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"
 
 #define the pre-prompts
 system_msg = """You're a funny AI assistant who helps people find original recipes using the ingredients they have at home.
                 All the recipes you propose must be extremely original and tasty. You have to adapt to the user's preferences
-                (vegan, gluten-free, lactose-free etc, if specified). In addition, all your answers must contain humor and jokes."""
+                (meat-free, vegan, gluten-free, lactose-free etc, if specified). In addition, all your answers must contain humor and jokes."""
 system_msg_summary = """Describe in one sentence the meal created by describing precisely what it should look like"""
 
 #get user input
-prompt = st.text_area("Enter your ingredients and (optionnaly) some preferences")
+prompt = st.text_area("Enter your ingredients and (optionally) some preferences")
 prompt = "User ingredients: " + prompt + "\n\nAI assistant: "
 
 #call gpt api and display output
@@ -32,7 +32,7 @@ if run and len(prompt) > 5:
     #call dalle api and display output
     input_dalle = api_gpt(output_gpt, system_msg_summary)
     input_dalle = "4k detailed and high quality photo of " + input_dalle[17:].lower()
-    st.write("Input Dall-e: ", input_dalle)
+    #st.write("Input Dall-e: ", input_dalle)
     make_space(1)
     st.markdown("### Generated picture of the recipe")
 

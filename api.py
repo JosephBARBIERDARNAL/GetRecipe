@@ -28,6 +28,6 @@ def api_dalle(prompt, n=2):
     image_data2 = requests.get(image_url2).content
     col1, col2 = st.columns(2)
     with col1:
-        st.image(image_data1, caption="Generated image", use_column_width=True)
+        st.image(image_data1, caption="Generated image, DALL•E", use_column_width=True)
     with col2:
-        st.image(image_data2, caption="Generated image", use_column_width=True)
+        st.image(image_data2, caption="Generated image, DALL•E", use_column_width=True)
