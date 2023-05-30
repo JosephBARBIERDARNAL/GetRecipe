@@ -7,8 +7,8 @@ st.title("From ingredients to Recipes")
 make_space(3)
 
 #define key
-#openai.api_key = st.secrets["openai_key"]
-openai.api_key = "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"
+openai.api_key = st.secrets["openai_key"]
+#openai.api_key = "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"
 
 #define the pre-prompts
 system_msg = """You're a funny AI assistant who helps people find original recipes using the ingredients they have at home.
