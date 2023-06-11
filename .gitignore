@@ -1,4 +1,4 @@
 *.png
 *.csv
-/venv
+venv/
 secrets.toml
