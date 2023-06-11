@@ -259,4 +259,4 @@ def ingredients():
     "apple cider vinegar",
     "red wine vinegar",
     "balsamic vinegar"]
-    return ingredients
+    return list(set(ingredients))

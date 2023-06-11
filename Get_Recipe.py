@@ -13,11 +13,12 @@ openai.api_key = st.secrets["openai_key"]
 #define the pre-prompts
 system_msg = """You're a funny AI assistant who helps people find original recipes using the ingredients they have at home.
                 All the recipes you propose must be extremely original and tasty. You have to adapt to the user's preferences
-                (meat-free, vegan, gluten-free, lactose-free etc, if specified). In addition, all your answers must contain humor and jokes."""
+                (meat-free, vegan, gluten-free, lactose-free etc, if specified by the user). In addition, all your answers must
+                contain humor and jokes."""
 system_msg_summary = """Describe in one sentence the meal created by describing precisely what it should look like"""
 
 #get user inputs
-meal_type = st.selectbox("What is your mood?", ["Pig out mood", "I want to eat clean", "Surprise me"])
+meal_type = st.selectbox("What is your mood?", ["Surprise me", "I want to eat clean", "Pig out mood"])
 prompt = st.text_area("Enter your ingredients and (optionally) some preferences")
 prompt = "User mood is: " + meal_type + "\n\n" + "User ingredients: " + prompt + "\n\nAI assistant: "
 
@@ -36,9 +37,6 @@ if run and len(prompt) > 5:
     make_space(1)
     st.markdown("### Generated picture of the recipe")
     api_dalle(input_dalle)
-    show_prompt = st.checkbox("Show prompt", value=True)
-    if show_prompt:
-        st.write("Input Dall-e: ", input_dalle)
 
 
 
