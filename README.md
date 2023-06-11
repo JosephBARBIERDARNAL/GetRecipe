@@ -4,7 +4,7 @@
 
 ## How to use the app?
 
-- Open the [app](https://josephbarbierdarnal-getrecipe-get-recipe-l1pxtt.streamlit.app) in your browser
+- Open the [app](https://recipe-generator-josephbarbier.streamlit.app) in your browser
 - Click on the *"Get recipe"* or *"Meal planner"* in the navigation bar
 - Enter your preferences
 - Enjoy :grin: 
