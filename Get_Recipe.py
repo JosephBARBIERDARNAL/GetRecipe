@@ -16,7 +16,7 @@ system_msg = """You're a funny AI assistant who helps people find original recip
                 All the recipes you propose must be extremely original and tasty. You have to adapt to the user's preferences
                 (meat-free, vegan, gluten-free, lactose-free etc, if specified by the user). In addition, all your answers must
                 contain humor and jokes."""
-system_msg_summary = """Describe in one sentence the meal created by describing precisely what it should look like"""
+system_msg_summary = """Describe in one sentence the meal created by describing precisely how it should look like"""
 
 #get user inputs
 meal_type = st.selectbox("What is your mood?", ["Surprise me", "I want to eat clean", "Pig out mood"])
