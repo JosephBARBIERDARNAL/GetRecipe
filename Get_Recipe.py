@@ -2,6 +2,7 @@ import streamlit as st
 import openai
 from api import api_gpt, api_dalle
 from front import make_space
+import base64
 
 st.title("From ingredients to Recipes")
 st.markdown("""##### This app generates recipes and pictures of the meals based on the ingredients you have at home. You can use the "Find a recipe" button several times to get different ideas.""")
@@ -30,13 +31,24 @@ if run and len(prompt) > 5:
     st.write(output_gpt)
     make_space(1)
 
-
     #call dalle api and display output
-    input_dalle = api_gpt(output_gpt, system_msg_summary)
-    input_dalle = "4k detailed and high quality photo of " + input_dalle[17:].lower()
+    init_input_dalle = api_gpt(output_gpt, system_msg_summary)
+    input_dalle = "4k detailed and high quality photo of " + init_input_dalle[16:].lower()
     make_space(1)
     st.markdown("### Generated picture of the recipe")
-    api_dalle(input_dalle)
+    image_data1, image_data2 = api_dalle(input_dalle)
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image(image_data1, caption="Generated image, DALL•E", use_column_width=True)
+    with col2:
+        st.image(image_data2, caption="Generated image, DALL•E", use_column_width=True)
+
+    #allow the user to save the recipe and picture in an html file (recipe first, then picture)
+    html = output_gpt + "<br><br>" + init_input_dalle[16:] + "<br><br><br><img src='data:image/png;base64,{}'>".format(base64.b64encode(image_data1).decode())
+    b64 = base64.b64encode(html.encode()).decode()
+    href = f'<a href="data:text/html;base64,{b64}" download="recipe.html">Download my recipe</a>'
+    st.markdown(href, unsafe_allow_html=True)
+
 
 
 

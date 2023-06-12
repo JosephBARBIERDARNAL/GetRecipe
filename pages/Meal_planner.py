@@ -40,17 +40,17 @@ else:
 output_gpt = None
 run = st.button("Find a meal plan!")
 if run and number_of_ingredients > 10:
-    output_gpt = api_gpt(prompt, system_msg_summary)
-    make_space(1)
+    with st.spinner("Loading"):
+        output_gpt = api_gpt(prompt, system_msg_summary)
+        make_space(1)
 
-    #download csv
-    df = csv_string_to_df(output_gpt)
-    #.write(output_gpt)
-    st.table(df)
-    csv = output_gpt.encode()
-    b64 = base64.b64encode(csv).decode()
-    href = f'<a href="data:file/csv;base64,{b64}" download="meal_plan.csv">Download my meal plan</a>'
-    st.markdown(href, unsafe_allow_html=True)
+        #download csv
+        df = csv_string_to_df(output_gpt)
+        st.table(df)
+        csv = output_gpt.encode()
+        b64 = base64.b64encode(csv).decode()
+        href = f'<a href="data:file/csv;base64,{b64}" download="meal_plan.csv">Download my meal plan</a>'
+        st.markdown(href, unsafe_allow_html=True)
 
 
 

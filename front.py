@@ -11,7 +11,7 @@ def make_space(n):
 @st.cache_data()
 def csv_string_to_df(csv_string):
     csv_data = StringIO(csv_string)
-    df = pd.read_csv(csv_data)
+    df = pd.read_csv(csv_data, on_bad_lines='skip')
     return df
 
 
