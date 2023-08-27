@@ -23,7 +23,7 @@ if not use_predefined_recipes:
     prompt = recipes
 else:
     recipes = recipes()
-    recipes = st.multiselect("Select the meals you want to cook", recipes)
+    recipes = st.multiselect("Select the meals you want to cook", recipes, max_selections=10)
     prompt = [string[0].upper() + string[1:] for string in recipes]
     prompt = ", ".join(prompt)
 
@@ -32,19 +32,18 @@ output_gpt = None
 run = st.button("Create grocery list!")
 if run:
     make_space(1)
-    with st.spinner("Loading"):
-        for recipe in recipes:
-            make_space(2)
-            output_gpt = api_gpt(recipe, system_msg_summary)
-            st.markdown("#### " + recipe)
+    for recipe in recipes:
+        make_space(2)
+        output_gpt = api_gpt(recipe, system_msg_summary)
+        st.markdown("#### " + recipe)
 
-            # download csv
-            df = csv_string_to_df(output_gpt)
-            st.table(df)
-            csv = output_gpt.encode()
-            b64 = base64.b64encode(csv).decode()
-            href = f'<a href="data:file/csv;base64,{b64}" download="{recipe}.csv">Download the list</a>'
-            st.markdown(href, unsafe_allow_html=True)
+        # download csv
+        df = csv_string_to_df(output_gpt)
+        st.table(df)
+        csv = output_gpt.encode()
+        b64 = base64.b64encode(csv).decode()
+        href = f'<a href="data:file/csv;base64,{b64}" download="{recipe}.csv">Download the list</a>'
+        st.markdown(href, unsafe_allow_html=True)
 
 
 

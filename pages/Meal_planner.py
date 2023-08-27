@@ -29,12 +29,11 @@ if not use_predefined_ingredients:
     number_of_ingredients = count_words(prompt)
 else:
     ingredients_list = ingredients()
-    prompt = st.multiselect("Select your ingredients", ingredients_list)
+    prompt = st.multiselect("Select your ingredients", ingredients_list, max_selections=50)
     prompt = [string[0].upper() + string[1:] for string in prompt]
     number_of_ingredients = len(prompt)
     prompt = ", ".join(prompt)
     st.write(f"You have {number_of_ingredients} ingredients\n\n {prompt}")
-
 
 #call gpt api and display output
 output_gpt = None
